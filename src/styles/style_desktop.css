@@ -19,12 +19,14 @@
         display: grid;
         grid-template-columns: 1fr 20%;
         align-items: start;
+        width: 100%;
+        height: 100%;
 
     }
     .container{       
-        margin-top: 250px;
-        margin-left: 200px;   
-
+      margin-top: 12%;
+      margin-left: 10%;
+      margin-right: 2%;
     }
     .title {
         margin-left: 45px;
@@ -33,17 +35,24 @@
         font-family: var(--font-family);
     }
     #card{
-        display: grid;
-        grid-template-columns:repeat(3, 30%);
-        grid-template-rows: repeat(3, 25%);
-        justify-content: center;
-        row-gap: 200px;
-        column-gap: 50px;
-        margin-top: 30px;
+      position: relative;
+      width: auto;
+      height: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 30%);
+      grid-template-rows: repeat(3, 25%);
+      justify-content: center;
+      row-gap: 11em;
+      column-gap: 50px;
+      margin-top: 3%;
+      margin-right: 2%;
+    }
+    .items-container{
+      position: relative;
     }
     .card-container {
         width: 100%;
-        height: 37em;
+        height: 100%;
         align-items: center;
         position: relative;
         
@@ -60,7 +69,7 @@
       }
       .card-tittle {
         font-weight: bold;
-        margin-left: 20px;
+        margin-left: 4%;
         font-family: var(--font-family);
         font-size: 1.5em;
       
@@ -73,6 +82,7 @@
         color: orangered
       }
     .orders-container {
+      margin-left: 2%;
       display: flex;
       flex-direction: column;
     }
@@ -92,29 +102,26 @@
         grid-column: 2/3;
         border-radius: 20px;
         border: 2px solid rgb(165, 106, 106);
-        background-color: rgb(255, 255, 255);
-        
-
-        
+        background-color: rgb(255, 255, 255);   
     }
     .addcar {
-        position: absolute;
-        left: 33.5%;
-        top: 85%;
-        font-family: var(--font-family);
-        font-size: 0.8rem;
-        height: 50px;
-        width: 150px;
-        background-color: white;
-        border: 2px solid rgb(165, 106, 106);
-        border-radius: 30px;
-        z-index: 1;
+      position: relative;
+      left: 30%;
+      top: -5%;
+      font-family: var(--font-family);
+      font-size: 0.8rem;
+      height: 57px;
+      width: 40%;
+      background-color: white;
+      border: 2px solid rgb(165, 106, 106);
+      border-radius: 30px;
+      z-index: 1;
     }
     .addcar img {
         width: 20px;
         height: 20px;
         margin-bottom: -5px;
-        margin-right: 10px;
+        margin-right: 4%;
     }
     .orders h2{
         display: flex;
@@ -173,16 +180,56 @@
         
     }
     .Confirm {
-        font-weight: bold;
-        font-family: var(--font-family);
-        font-size: 1rem;
-        color: white;
-        width: 25em;
-        height: 81px;
-        background-color: orangered;
-        border-radius: 40px;
-        border: none;
+      font-weight: bold;
+      font-family: var(--font-family);
+      font-size: 1.1rem;
+      display: flex;
+      color: white;
+      width: 80%;
+      height: 81px;
+      background-color: orangered;
+      border-radius: 40px;
+      border: none;
+      justify-content: center;
+      align-items: center;
     }
+    .win_emergent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.663);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 3;
+    }
+    .emergent_content {
+      width: 95%;
+      padding: 150px;
+      padding-top: 200px;
+      padding-bottom: 200px;
+      position: relative;
+      border-radius: 10px;
+      box-sizing: border-box;
+      background-color: white;
+      border: 2px solid rgb(165, 106, 106);
+      z-index: 3;
+    }
+    .btn_emergent {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      font-family: var(--font-family);
+      border: none;
+      background: none;
+      outline: none;
+      z-index: 3;
+    }
+  
 
 
 
