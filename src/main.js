@@ -1,6 +1,6 @@
-import "./styles/style.css";
 import "./styles/style_desktop.css";
-import img from "./assets/cart-arrow-down.svg";
+import "./styles/style.css";
+import img from "/src/assets/icon-add-to-cart.svg";
 import data from "../data.json";
 import javascriptLogo from "./javascript.svg";
 import viteLogo from "/vite.svg";
@@ -40,9 +40,11 @@ document.querySelector("#card").innerHTML = cards;
 // somCard.addEventListener()
 
 let botons = document.querySelectorAll(".addcar");
-
+let textEmpty = document.querySelector(".text_empty");
+let imgEmpty = document.querySelector(".img_empty");
 let showCart = false;
 let totalShopping = 0;
+let valueTotal = 0;
 
 for (let i = 0; i < botons.length; i++) {
   /*se itera por la cantidad de botones que hay */
@@ -53,6 +55,8 @@ for (let i = 0; i < botons.length; i++) {
     /*se le asigna un evento, cuando haga click */
     let shopingProd = ""; /*creamos una variable que tiene un str vacio */
     if (totalShopping == 0) {
+      textEmpty.style.display = "none";
+      imgEmpty.style.display = "none";
       /*comprobamos si la variable es igual a 0 */
       shopingProd = `<h2 id="totalContainer" class="shoppingProd" >Your Cart(<span id="totalShopping">${
         totalShopping + 1
@@ -95,6 +99,7 @@ for (let i = 0; i < botons.length; i++) {
       const inicialValue = 1; /*se crea la variable del counter */
       totalShopping += 1; /*si no hay objetos repetidos, toma este valor y sigue  */
 
+      
       const pricesItem = document.getElementById(`priceItem-${i}`); /*en una variable guardamos el getElement de priceItem */
       const divPriceItem = document.getElementById(pricesItem.dataset.value); /*en otra variable guardaremos la variable anterior junto con el metodo dataset */
       console.log("aca totalShopping: ", totalShopping);
@@ -104,28 +109,48 @@ for (let i = 0; i < botons.length; i++) {
       // console.log(quantityData)
 
       shopingProd += `<div class="shoping-card-container" id="${nameProd.dataset.value}">
-                              <div class="shoping-card-description">
-                                <span >${nameProd.dataset.value}</span>
-                                <div class="shoping-card-pricing">
-                                  <span data-value="${inicialValue}" id="counter" class="counter">${inicialValue}x</span>
-                                  <span data-value="${pricesItem.dataset.value}" id="priceItem" class="price-item">$${pricesItem.dataset.value}</span>
-                                  <span data-value="${quantityData}" id="quantityItem" class="quantity">$${quantityData}</span>
-                                </div>
+                          <div class="shoping-card-description">
+                              <span >${nameProd.dataset.value}</span>
+                              <div class="shoping-card-pricing">
+                                <span data-value="${inicialValue}" id="counter" class="counter">${inicialValue}x</span>
+                                <span data-value="${pricesItem.dataset.value}" id="priceItem" class="price-item">$${pricesItem.dataset.value}</span>
+                                <span data-value="${quantityData}" id="quantityItem" class="quantity">$${quantityData}</span>
                               </div>
-                              <div>
-                                <button class="cancel" id="btn-${nameProd.dataset.value}">X</button>
-                              </div>
-                            </div>`;
+                          </div>
+                          <div>
+                              <button class="cancel" id="btn-${nameProd.dataset.value}">X</button>
+                          </div>
+                        </div>
+                        `;
 
       let shoppingCartSpan = document.getElementById("totalShopping");
       if (shoppingCartSpan) {
         console.log("aqui totalShopping: ", totalShopping);
         shoppingCartSpan.textContent = totalShopping;
       }
+      // let counterTotal = document.getElementById("counter");
+      // let quantityValue = document.getElementById("quantityItem");
+      // let valueResult = document.getElementById("orderValue");
+      // if (valueResult) {
+      //   for(i = 0; i < counterTotal.length; i++) {
+      //     valueResult += Number(quantityValue.dataset.value);
+      //   }
+      // }
+      // let totalValue = "";
+      // if(totalValue == ""){
+      //   totalValue = shopingProd;
+      //   shopingProd +=`<div>
+      //                     <span id="orderValue">Order Total ${valueTotal}</span>
+      //                   </div>
+          
+      //                     `;
+      //   }
 
       document
         .querySelector(".orders")
         .insertAdjacentHTML("beforeend", shopingProd);
+
+      
 
       let cancelbuttons = document.querySelectorAll(".cancel");
       console.log("cancelbuttons", cancelbuttons);
@@ -181,13 +206,17 @@ for (let i = 0; i < botons.length; i++) {
               /*creamos una nueva variable donde guardamos el valor mediante el id */
               removeCart.remove();
               /*lo removemos para que no se muestre fisicamente */
+              textEmpty.style.display = "block";
+              imgEmpty.style.display = "block";
             }
           }
         });
       });
-      const confirmOrder = document.querySelector(".Confirm");
-      const confirmPrice = document.getElementById("priceItem");
-      const confirmquantity = document.getElementById("quantityItem");
+      // const confirmOrder = document.querySelector(".Confirm");
+      // const confirmPrice = document.getElementById(`priceItem-${i}`);
+      // const confirmquantity = document.getElementById("quantityItem");
+      // const divNameProd = document.getElementById(nameProd.dataset.value);
+      // const quantityConfirm = divNameProd.querySelector(".quantity");
 
       // confirmOrder.addEventListener("click", () => {
       //     const dataConfim = `<div class="win_emergent">
@@ -195,24 +224,27 @@ for (let i = 0; i < botons.length; i++) {
       //                               <img src=""/>
       //                               <span>${nameProd.dataset.value}</span>
       //                               <span>${pricesItem.dataset.value}</span>
-      //                               <span>${confirmquantity.dataset.value}</span>
+      //                               <span>${quantityConfirm.dataset.value}</span>
       //                               <button id="btn_close" class="btn_emergent">X</button>
       //                             </div>
-      // //                           </div>`
+      //                           </div>`
 
-      //     // const btnClose = document.getElementById("btn_close");
-      //     // document.querySelector(".btn_emergent").addEventListener("click", () =>{
-      //     //   console.log("btnCLose", e);
-      //     //   dataConfim ="";
-      //     // });
+          // const btnClose = document.getElementById("btn_close");
+          // document.querySelector(".btn_emergent").addEventListener("click", () =>{
+          //   console.log("btnCLose", e);
+          //   dataConfim ="";
+          // });
 
           
-      //     document.querySelector(".orders").insertAdjacentHTML("beforeend", dataConfim);
+          // document.querySelector(".orders").insertAdjacentHTML("beforeend", dataConfim);
       
 
       //  });
 
 
     }
+    
+
+
   });
 }
