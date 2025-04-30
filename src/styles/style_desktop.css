@@ -114,6 +114,9 @@
         border-radius: 20px;
         background-color: rgb(255, 255, 255);   
     }
+    .counter{
+      color: orangered;
+    }
     .addcar {
       position: relative;
       left: 30%;
@@ -218,16 +221,72 @@
       z-index: 3;
     }
     .emergent_content {
-      width: 95%;
-      padding: 150px;
-      padding-top: 200px;
-      padding-bottom: 200px;
+      width: 35%;
+      height: 70%;
+      padding: 90px;
+      margin-right: 4%;
+      display: flex;
       position: relative;
       border-radius: 10px;
       box-sizing: border-box;
       background-color: white;
       border: 2px solid rgb(165, 106, 106);
       z-index: 3;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .confirmDescription {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: 7px;
+      font-family: var(--font-family);
+
+    }
+    .confirmDescription h1{
+      font-size: 2.7rem;
+      margin-top: 15px;
+    }
+    .confirmDescription span {
+      margin-top: 10px;
+      margin-bottom: 40px;
+      color: rgb(198, 173, 161);
+    }
+    .orderResult{
+      display: flex;
+      padding: 20px;
+
+    }
+    .ordersConfirmedContainer {
+      background-color: rgb(254, 248, 248);
+      border-radius: 10px;
+      width: 95%;
+    }
+    .ordersConfirmed{
+      border-bottom: 1px solid gray;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      font-family: var(--font-family);
+      font-size: 1.1rem;
+      column-gap: 23%;
+      
+    }
+    .ordersConfirmedDescription{
+      display: flex;
+      flex-direction: column;
+      padding-left: 8px;
+    }
+    .ordersConfirmedPrice{
+      display: flex;
+      flex-direction: row;
+      column-gap: 40px;
+    }
+    .TotalConfirmed{
+      padding-right: 10px;
     }
     .btn_emergent {
       position: absolute;
@@ -240,6 +299,27 @@
       background: none;
       outline: none;
       z-index: 3;
+    }
+    .quantityConfirm {
+      color: rgb(36, 21, 14);
+    }
+    .btn_Reset {
+      margin-top: 40px;
+      width: 43.5rem;
+      height: 73px;
+      background-color: rgb(224, 60, 0);
+      border-radius: 40px;
+      border: none;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-family: var(--font-family);
+      font-size: 1.1rem;
+      display: flex;
+      color: white;
+    }
+    .btn_ResetContainer{
+      position: relative;
     }
   
 

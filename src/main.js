@@ -112,7 +112,7 @@ for (let i = 0; i < botons.length; i++) {
                           <div class="shoping-card-description">
                               <span >${nameProd.dataset.value}</span>
                               <div class="shoping-card-pricing">
-                                <span data-value="${inicialValue}" id="counter" class="counter">${inicialValue}x</span>
+                                <span data-value="${inicialValue}" id="counter" class="counter">x${inicialValue}</span>
                                 <span data-value="${pricesItem.dataset.value}" id="priceItem" class="price-item">$${pricesItem.dataset.value}</span>
                                 <span data-value="${quantityData}" id="quantityItem" class="quantity">$${quantityData}</span>
                               </div>
@@ -212,22 +212,45 @@ for (let i = 0; i < botons.length; i++) {
           }
         });
       });
-      // const confirmOrder = document.querySelector(".Confirm");
-      // const confirmPrice = document.getElementById(`priceItem-${i}`);
-      // const confirmquantity = document.getElementById("quantityItem");
-      // const divNameProd = document.getElementById(nameProd.dataset.value);
-      // const quantityConfirm = divNameProd.querySelector(".quantity");
+      const confirmOrder = document.querySelector(".Confirm");
+      const counterConfirm = document.getElementById("counter");
+      const confirmPrice = document.getElementById(`priceItem-${i}`);
+      const confirmquantity = document.getElementById("quantityItem");
+      const divNameProd = document.getElementById(nameProd.dataset.value);
+      const quantityConfirm = divNameProd.querySelector(".quantity");
 
-      // confirmOrder.addEventListener("click", () => {
-      //     const dataConfim = `<div class="win_emergent">
-      //                             <div class="emergent_content">
-      //                               <img src=""/>
-      //                               <span>${nameProd.dataset.value}</span>
-      //                               <span>${pricesItem.dataset.value}</span>
-      //                               <span>${quantityConfirm.dataset.value}</span>
-      //                               <button id="btn_close" class="btn_emergent">X</button>
-      //                             </div>
-      //                           </div>`
+      confirmOrder.addEventListener("click", () => {
+          const dataConfim = `<div class="win_emergent">
+                                  <div class="emergent_content">
+                                    <div class="confirmDescription">
+                                      <img src="./src/assets/icon-order-confirmed.svg" alt="">
+                                      <h1>Order Confirmed</h1>
+                                      <span>We hope you enjoy your food!</span>
+                                    </div>
+                                    <div class="ordersConfirmedContainer">
+                                      <div class="ordersConfirmed">
+                                        <div class="ordersConfirmedDescription">
+                                          <img src=""/>
+                                          <span>${nameProd.dataset.value}</span>
+                                          <div class="ordersConfirmedPrice">
+                                            <span class="counter">x${counterConfirm.dataset.value}</span>
+                                            <span class="price-item">@${pricesItem.dataset.value}</span>
+                                          </div>
+                                        </div>
+                                        <div class="TotalConfirmed">
+                                          <span class="quantityConfirm">${quantityConfirm.dataset.value}</span>
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <span class="orderResult">Order Total</span>
+                                      </div>
+                                    </div>
+                                      <div class="btn_ResetContainer">
+                                        <button class="btn_Reset">Start New Order</button>
+                                      </div>
+                                      <button id="btn_close" class="btn_emergent">X</button>
+                                  </div>
+                                </div>`
 
           // const btnClose = document.getElementById("btn_close");
           // document.querySelector(".btn_emergent").addEventListener("click", () =>{
@@ -236,10 +259,10 @@ for (let i = 0; i < botons.length; i++) {
           // });
 
           
-          // document.querySelector(".orders").insertAdjacentHTML("beforeend", dataConfim);
+          document.querySelector(".orders").insertAdjacentHTML("beforeend", dataConfim);
       
 
-      //  });
+        });
 
 
     }
