@@ -58,9 +58,8 @@ for (let i = 0; i < botons.length; i++) {
       textEmpty.style.display = "none";
       imgEmpty.style.display = "none";
       /*comprobamos si la variable es igual a 0 */
-      shopingProd = `<h2 id="totalContainer" class="shoppingProd" >Your Cart(<span id="totalShopping">${
-        totalShopping + 1
-      }</span>)</h2>`; /*creamos el titulo donde el numero aumentara cuando se le añadan numeros */
+      shopingProd = `<h2 id="totalContainer" class="shoppingProd" >Your Cart(<span id="totalShopping">${totalShopping + 1
+        }</span>)</h2>`; /*creamos el titulo donde el numero aumentara cuando se le añadan numeros */
     }
     const nameProd = document.getElementById(`prodName-${i}`); /*se localiza la variable mediante id y se guarda en una nueva variable */
     const divProdName = document.getElementById(nameProd.dataset.value); /*se obtiene el valor de data a traves de la variable creada anteriormente */
@@ -81,8 +80,8 @@ for (let i = 0; i < botons.length; i++) {
           const quantityValue = (counterValue + 1) * Number(divPriceItem.dataset.value); /*declaramos una variable donde estara la multiplicacion de quantity*/
           quantityResult.textContent = "$" + quantityValue; /*sobreescribiremos el valor html de quantityResult */
           quantityResult.dataset.value = quantityValue; /*sobreescribimos el value de la variable */
-          console.log("Result",quantityResult)
-          console.log("Value",quantityValue)
+          console.log("Result", quantityResult)
+          console.log("Value", quantityValue)
           console.log("divProdName", divProdName)
         }
         totalShopping += 1; /*cuando se añade un articulo repetido este igual se añade */
@@ -99,7 +98,7 @@ for (let i = 0; i < botons.length; i++) {
       const inicialValue = 1; /*se crea la variable del counter */
       totalShopping += 1; /*si no hay objetos repetidos, toma este valor y sigue  */
 
-      
+
       const pricesItem = document.getElementById(`priceItem-${i}`); /*en una variable guardamos el getElement de priceItem */
       const divPriceItem = document.getElementById(pricesItem.dataset.value); /*en otra variable guardaremos la variable anterior junto con el metodo dataset */
       console.log("aca totalShopping: ", totalShopping);
@@ -142,7 +141,7 @@ for (let i = 0; i < botons.length; i++) {
       //   shopingProd +=`<div>
       //                     <span id="orderValue">Order Total ${valueTotal}</span>
       //                   </div>
-          
+
       //                     `;
       //   }
 
@@ -150,7 +149,7 @@ for (let i = 0; i < botons.length; i++) {
         .querySelector(".orders")
         .insertAdjacentHTML("beforeend", shopingProd);
 
-      
+
 
       let cancelbuttons = document.querySelectorAll(".cancel");
       console.log("cancelbuttons", cancelbuttons);
@@ -186,7 +185,7 @@ for (let i = 0; i < botons.length; i++) {
                 /*si existe la variable */
                 const resValue =
                   Number(totalShopping) - Number(counterResult.dataset.value);
-                  /*creamos una nueva variable donde guardaremos la resta del resultShopping */
+                /*creamos una nueva variable donde guardaremos la resta del resultShopping */
 
                 console.log("totalShopping", totalShopping);
                 console.log("resValue", resValue);
@@ -219,13 +218,13 @@ for (let i = 0; i < botons.length; i++) {
       console.log("esto es confirmContainer.length", confirmContainer.length);
       console.log("esto es ShoppingProd.length", spanNameProd);
       const divPriceConfirm = document.getElementById(`priceItem-${i}`);
-      console.log("esto es confirmContainer",divPriceConfirm);
+      console.log("esto es confirmContainer", divPriceConfirm);
       const divNameProd = document.getElementById(nameProd.dataset.value);
       const quantityConfirm = divNameProd.querySelector(".quantity");
-    
+
       confirmOrder.addEventListener("click", () => {
 
-          const dataConfim = `<div class="win_emergent">
+        const dataConfim = `<div class="win_emergent">
                                   <div class="emergent_content">
                                     <div class="confirmDescription">
                                       <img src="./src/assets/icon-order-confirmed.svg" alt="">
@@ -250,40 +249,43 @@ for (let i = 0; i < botons.length; i++) {
                                   </div>
                                 </div>`
 
-          // const btnClose = document.getElementById("btn_close");
-          // document.querySelector(".btn_emergent").addEventListener("click", () =>{
-          //   console.log("btnCLose", e);
-          //   dataConfim ="";
-          // });
+        const win_emergent = document.querySelector(".win_emergent")
 
-          
+        if (!win_emergent) {
           document.querySelector(".emergent").insertAdjacentHTML("beforeend", dataConfim);
-          
-          for (let i = 0; i < confirmContainer.length; i++){
-              const divNameCorfirm = `<img src=""/>
-                                      <span>${spanNameProd.dataset.value}</span>
-                                      <div class="ordersConfirmedPrice">
-                                        <span class="counter">x${counterConfirm.dataset.value}</span>
-                                        <span class="price-item">@${divPriceConfirm.dataset.value}</span>
-                                      </div>
+        }
+
+        if (win_emergent) {
+          win_emergent.style.display = "flex"
+        }
+
+        for (let i = 0; i < confirmContainer.length; i++) {
+          if (document.getElementById(spanNameProd.dataset.value + "-detail")) {
+            continue
+          }
+          const divNameCorfirm = `<img src=""/>
+                                  <span id="${spanNameProd.dataset.value}-detail">${spanNameProd.dataset.value}</span>
+                                  <div class="ordersConfirmedPrice">
+                                    <span class="counter">x${counterConfirm.dataset.value}</span>
+                                    <span class="price-item">@${divPriceConfirm.dataset.value}</span>
+                                  </div>
                                       `
-        
-              document.querySelector(".ordersConfirmedDescription").insertAdjacentHTML("afterbegin", divNameCorfirm)
-              
-              const quantityConfirmValue = `<span class="quantityConfirm">$${quantityConfirm.dataset.value}</span>`
-  
-              document.querySelector(".TotalConfirmed").insertAdjacentHTML("afterbegin", quantityConfirmValue)
-  
 
-            }
-          
-        
-     });
-    
+          document.querySelector(".ordersConfirmedDescription").insertAdjacentHTML("beforeend", divNameCorfirm)
 
+          const quantityConfirmValue = `<span class="quantityConfirm">$${quantityConfirm.dataset.value}</span>`
+
+          document.querySelector(".TotalConfirmed").insertAdjacentHTML("beforeend", quantityConfirmValue)
+        }
+
+        const btnClose = document.getElementById("btn_close");
+
+        btnClose.addEventListener("click", () => {
+          if (win_emergent) {
+            win_emergent.style.display = "None"
+          }
+        });
+      });
     }
-    
-
-
   });
 }
