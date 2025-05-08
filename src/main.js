@@ -249,40 +249,43 @@ for (let i = 0; i < botons.length; i++) {
                                   </div>
                                 </div>`
 
-        // const btnClose = document.getElementById("btn_close");
-        // document.querySelector(".btn_emergent").addEventListener("click", () =>{
-        //   console.log("btnCLose", e);
-        //   dataConfim ="";
-        // });
+        const win_emergent = document.querySelector(".win_emergent")
 
+        if (!win_emergent) {
+          document.querySelector(".emergent").insertAdjacentHTML("beforeend", dataConfim);
+        }
 
-        document.querySelector(".emergent").insertAdjacentHTML("beforeend", dataConfim);
+        if (win_emergent) {
+          win_emergent.style.display = "flex"
+        }
 
         for (let i = 0; i < confirmContainer.length; i++) {
+          if (document.getElementById(spanNameProd.dataset.value + "-detail")) {
+            continue
+          }
           const divNameCorfirm = `<img src=""/>
-                                      <span>${spanNameProd.dataset.value}</span>
+                                      <span id="${spanNameProd.dataset.value}-detail">${spanNameProd.dataset.value}</span>
                                       <div class="ordersConfirmedPrice">
                                         <span class="counter">x${counterConfirm.dataset.value}</span>
                                         <span class="price-item">@${divPriceConfirm.dataset.value}</span>
                                       </div>
                                       `
 
-          document.querySelector(".ordersConfirmedDescription").insertAdjacentHTML("afterbegin", divNameCorfirm)
+          document.querySelector(".ordersConfirmedDescription").insertAdjacentHTML("beforeend", divNameCorfirm)
 
           const quantityConfirmValue = `<span class="quantityConfirm">$${quantityConfirm.dataset.value}</span>`
 
-          document.querySelector(".TotalConfirmed").insertAdjacentHTML("afterbegin", quantityConfirmValue)
-
-
+          document.querySelector(".TotalConfirmed").insertAdjacentHTML("beforeend", quantityConfirmValue)
         }
 
+        const btnClose = document.getElementById("btn_close");
 
+        btnClose.addEventListener("click", () => {
+          if (win_emergent) {
+            win_emergent.style.display = "None"
+          }
+        });
       });
-
-
     }
-
-
-
   });
 }
