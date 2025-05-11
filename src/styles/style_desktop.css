@@ -254,9 +254,14 @@
       color: rgb(198, 173, 161);
     }
     .orderResult{
+      font-family: var(--font-family);
+      font-weight: bold;
       display: flex;
       padding: 20px;
-
+      justify-content: space-between;
+    }
+    .total-Price{
+      padding-right: 15px;
     }
     .ordersConfirmedContainer {
       background-color: rgb(254, 248, 248);
@@ -272,7 +277,6 @@
       padding: 20px;
       font-family: var(--font-family);
       font-size: 1.1rem;
-      column-gap: 23%;
       font-weight: bold;
       
     }
@@ -303,6 +307,8 @@
     }
     .quantityConfirm {
       color: rgb(36, 21, 14);
+      margin-bottom: 17px;
+      display: flex;
     }
     .btn_Reset {
       margin-top: 40px;
