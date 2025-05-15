@@ -13,17 +13,26 @@
       <div id="card"></div>
     </div>
     <div class="orders-container">
-      <div class="orders">
-        <img class="img_empty" src="./src/assets/illustration-empty-cart.svg" alt="">
-        <span class="text_empty">Your added items will appear here</span>
-      </div>
-      <div>
-        <div>
-          <span id="orderValue">Order Total</span>
+      <div class="items-containers-orders">
+        <div class="orders">
+          <img class="img_empty" src="./src/assets/illustration-empty-cart.svg" alt="">
+          <span class="text_empty">Your added items will appear here</span>
         </div>
-      </div>
-      <div class="btn-confirm">
-        <button class="Confirm" type="submit">CONFIRM ORDER</button>
+        <div class="total-confirm-container">
+          <div>
+            <div class="orderValue">
+              <span id="orderValue">Order Total:</span>
+              <p data-value="0" class="valueResult"></p>
+            </div>
+          </div>
+          <div class="carbon-text">
+            <img src="./src/assets/icon-carbon-neutral.svg" width="10px">
+            <p>This is a <b>carbon-neutral</b> delivery</p>
+          </div>
+          <div class="btn-confirm">
+            <button class="Confirm" type="submit">CONFIRM ORDER</button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="emergent">

@@ -10,6 +10,7 @@ import viteLogo from "/vite.svg";
 let cards = "";
 let totalValueItems = 0;
 
+
 for (let i in data) {
   const imageSrc = data[i].image.desktop;
   const nameData = data[i].name;
@@ -43,9 +44,12 @@ document.querySelector("#card").innerHTML = cards;
 let botons = document.querySelectorAll(".addcar");
 let textEmpty = document.querySelector(".text_empty");
 let imgEmpty = document.querySelector(".img_empty");
+let confirmText = document.querySelector(".total-confirm-container");
 let showCart = false;
 let totalShopping = 0;
 let valueTotal = 0;
+
+
 
 
 for (let i = 0; i < botons.length; i++) {
@@ -59,6 +63,8 @@ for (let i = 0; i < botons.length; i++) {
     if (totalShopping == 0) {
       textEmpty.style.display = "none";
       imgEmpty.style.display = "none";
+      confirmText.style.display = "block";
+
       /*comprobamos si la variable es igual a 0 */
       shopingProd = `<h2 id="totalContainer" class="shoppingProd" >Your Cart(<span id="totalShopping">${totalShopping + 1
         }</span>)</h2>`; /*creamos el titulo donde el numero aumentara cuando se le añadan numeros */
@@ -115,7 +121,7 @@ for (let i = 0; i < botons.length; i++) {
                               <div class="shoping-card-pricing">
                                 <span data-value="${inicialValue}" id="counter" class="counter">x${inicialValue}</span>
                                 <span data-value="${pricesItem.dataset.value}" id="priceItem" class="price-item">$${pricesItem.dataset.value}</span>
-                                <span data-value="${quantityData}" id="quantityItem" class="quantity">$${quantityData}</span>
+                                <span data-value="${quantityData}" id="${nameProd.dataset.value}-result" class="quantity">$${quantityData}</span>
                               </div>
                           </div>
                           <div>
@@ -130,30 +136,25 @@ for (let i = 0; i < botons.length; i++) {
         shoppingCartSpan.textContent = totalShopping;
       }
 
-
-      // let counterTotal = document.getElementById("counter");
-      // let quantityValue = document.getElementById("quantityItem");
-      // let valueResult = document.getElementById("orderValue");
-      // if (valueResult) {
-      //   for(i = 0; i < counterTotal.length; i++) {
-      //     valueResult += Number(quantityValue.dataset.value);
-      //   }
-      // }
-      // if (!document.getElementById("orderValue")) {
-        
-      //   shopingProd +=`<div>
-      //                     <span id="orderValue">Order Total ${valueTotal}</span>
-      //                   </div>
-
-      //                     `;
       
-      // }
-
+      
       document
-        .querySelector(".orders")
-        .insertAdjacentHTML("beforeend", shopingProd);
+      .querySelector(".orders")
+      .insertAdjacentHTML("beforeend", shopingProd);
+      
+      
+      const pValueResult = document.querySelector(".valueResult");
+      const pQuantityResult = document.getElementById(`${nameProd.dataset.value}-result`);
+      const pResult = Number(valueTotal) + Number(pQuantityResult.dataset.value);
+      pValueResult.textContent = "$" + Number(pResult);
+      pQuantityResult.dataset.value = pResult;
+      valueTotal += pResult  
 
-
+      console.log("aca pValueResult",pValueResult);
+      console.log("aca pQuantityResult",pQuantityResult.dataset.value);
+      console.log("aca pResult",pResult);
+      console.log("aca valueTotal",valueTotal);
+      
 
       let cancelbuttons = document.querySelectorAll(".cancel");
       console.log("cancelbuttons", cancelbuttons);
@@ -211,6 +212,7 @@ for (let i = 0; i < botons.length; i++) {
               /*lo removemos para que no se muestre fisicamente */
               textEmpty.style.display = "block";
               imgEmpty.style.display = "block";
+              confirmText.style.display = "none";
             }
           }
         });
