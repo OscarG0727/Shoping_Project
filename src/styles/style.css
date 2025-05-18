@@ -175,6 +175,11 @@
   .btn_emergent {
     display: none;
   }
+
+  .orderConfirmedInfo {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 
