@@ -259,11 +259,12 @@ for (let i = 0; i < botons.length; i++) {
       const divPriceConfirm = document.getElementById(`priceItem-${i}`);
       const divNameProd = document.getElementById(nameProd.dataset.value);
       const quantityConfirm = divNameProd.querySelector(".quantity");
-      const counterConfirm = divNameProd.querySelector(".counter")
+      const counterConfirm = divNameProd.querySelector(".counter");
+
       let totalValuePrice = 0;
-
+      
       confirmOrder.addEventListener("click", () => {
-
+        
         const dataConfim = `<div class="win_emergent">
                                   <div class="emergent_content">
                                     <div class="confirmDescription">
@@ -304,11 +305,28 @@ for (let i = 0; i < botons.length; i++) {
 
         for (let i = 0; i < confirmContainer.length; i++) {
           if (document.getElementById(spanNameProd.dataset.value + "-detail")) {
+            const divCounter = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
+            const counterInfo = divCounter.querySelector(".counter");
+            counterInfo.textContent = "x" + counterConfirm.dataset.value;
+            counterInfo.dataset.value = counterConfirm.dataset.value;
+            const quantityPrice = divCounter.querySelector(".quantityConfirm");
+            quantityPrice.textContent = "$" + quantityConfirm.dataset.value;
+            quantityPrice.dataset.value = quantityConfirm.dataset.value;
+            
+            const totalPrice = document.querySelector(".total-Price");
+            const quantityPopupResults = document.querySelector(".ordersConfirmedDescription").querySelectorAll(".quantityConfirm");
+            if (quantityResults) {
+              let totalPopupQuantityInner = 0
+              for (const entry of quantityPopupResults) {
+                totalPopupQuantityInner += Number(entry.dataset.value);
+              }
+              totalPrice.textContent = "$" + totalPopupQuantityInner;
+            }
             continue
           }
           const divNameCorfirm = `<img src=""/>
                                   <span id="${spanNameProd.dataset.value}-detail">${spanNameProd.dataset.value}</span>
-                                  <div class="orderConfirmedInfo">
+                                  <div class="orderConfirmedInfo" id="${spanNameProd.dataset.value}-orderConfirmInfo">
                                     <div class="ordersConfirmedPrice">
                                       <span class="counter">x${counterConfirm.dataset.value}</span>
                                       <span class="price-item">@${divPriceConfirm.dataset.value}</span>
