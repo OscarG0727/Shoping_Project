@@ -61,7 +61,7 @@
     color: orangered
   }
   .addcar {
-    position: absolute;
+    position: relative;
     bottom: -15px;
     left: 50%;
     transform: translateX(-50%);
@@ -136,18 +136,35 @@
     font-size: 1em;
     margin-bottom: 10%;
   }
+  .items-containers-orders{
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 2%;
+    border-radius: 20px;
+    font-family: var(--font-family);
+  }
+  .orderValue{
+    font-weight: bold;
+    display: flex;
+    background-color: white;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-right: 10%;
+    padding-left: 5%;
+    margin-bottom: 2%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .carbon-text{
+    display: none;
+  }
   .orders {
     font-family: var(--font-family);
     font-weight: bold;
     text-align: center;
     align-items: center;
-    margin-bottom: 110px;
     height: auto;
     width: 100%;
     display: grid;
-    grid-row: 9/10;
-    border-radius: 20px;
-    
     background-color: rgb(255, 255, 255);
   }
   .counter{
@@ -161,7 +178,7 @@
     width: 20em;
     height: 60px;
     background-color: orangered;
-    margin-bottom: 70px;
+    margin-bottom: 2%;
     border-radius: 30px;
     border: none;
     grid-row: 10/12;

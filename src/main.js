@@ -183,6 +183,7 @@ for (let i = 0; i < botons.length; i++) {
           totalQuantityInner += Number(entry.dataset.value);
         }
         pValueResult.textContent = "$" + totalQuantityInner;
+        pValueResult.dataset.value = totalQuantityInner;
       }
 
       /* console.log("aca pValueResult", pValueResult);
@@ -238,6 +239,19 @@ for (let i = 0; i < botons.length; i++) {
 
             selectedContainer.remove();
             /*removemos el selectedContainer despues de restar el totalShopping */
+            
+            const restQuantity = divNameProd.querySelector(".quantity");
+            console.log("restQuantity", restQuantity.dataset.value);
+            console.log("pValueResult", pValueResult.dataset.value);
+            if (restQuantity){
+              let totalQuantityInput = Number(pValueResult.dataset.value) - Number(restQuantity.dataset.value);
+              console.log("totalQuantity", totalQuantityInput);
+              console.log("pValue", pValueResult);
+              pValueResult.textContent = "$" + totalQuantityInput; 
+              pValueResult.dataset.value = totalQuantityInput;
+              console.log("pValue", pValueResult);
+            }
+
 
             if (totalShopping <= 0) {
               /*si la variable es menor o igual que 0 */
