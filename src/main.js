@@ -138,7 +138,7 @@ for (let i = 0; i < botons.length; i++) {
       // console.log(quantityData)
 
       shopingProd += `<div class="shoping-card-container" id="${nameProd.dataset.value}">
-                          <div class="shoping-card-description">
+                          <div class="shoping-card-description" id="${nameProd.dataset.value}-description">
                               <span id="spanNameProd">${nameProd.dataset.value}</span>
                               <div class="shoping-card-pricing">
                                 <span data-value="${inicialValue}" id="counter" class="counter">x${inicialValue}</span>
@@ -316,7 +316,7 @@ for (let i = 0; i < botons.length; i++) {
         }
 
 
-
+        console.log(confirmContainer);
         for (let i = 0; i < confirmContainer.length; i++) {
           if (document.getElementById(spanNameProd.dataset.value + "-detail")) {
             const divCounter = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
@@ -336,8 +336,20 @@ for (let i = 0; i < botons.length; i++) {
               }
               totalPrice.textContent = "$" + totalPopupQuantityInner;
             }
+            let containerShopping = document.getElementById(`${nameProd.dataset.value}-description`);
+            console.log(containerShopping);
+            let removeShopping = document.getElementById(`${spanNameProd.dataset.value}-detail`)
+            console.log(containerShopping);
+            if (!containerShopping) {
+              let removeShoppingInfo = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
+              removeShopping.remove();
+              removeShoppingInfo.remove();
+              console.log("confirmContainer", confirmContainer.length);
+            }
+
             continue
           }
+          console.log("confirmContainer", confirmContainer.length);
           const divNameCorfirm = `<img src=""/>
                                   <span id="${spanNameProd.dataset.value}-detail">${spanNameProd.dataset.value}</span>
                                   <div class="orderConfirmedInfo" id="${spanNameProd.dataset.value}-orderConfirmInfo">
@@ -362,6 +374,14 @@ for (let i = 0; i < botons.length; i++) {
             }
             totalPrice.textContent = "$" + totalPopupQuantityInner;
           }
+
+          let containerShopping = document.getElementById(`${nameProd.dataset.value}-description`);
+          console.log("removeShopping", containerShopping);
+            // if(!containerShopping) {
+            //   let removeShopping = document.getElementById();
+            //   removeShopping.remove();
+            //   i--;
+            // }
         }
 
 
