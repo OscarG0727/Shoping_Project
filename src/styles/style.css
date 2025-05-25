@@ -62,7 +62,7 @@
   }
   .addcar {
     position: relative;
-    bottom: -15px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     font-family: var(--font-family);
@@ -163,6 +163,7 @@
     text-align: center;
     align-items: center;
     height: auto;
+    border-radius: 20px;
     width: 100%;
     display: grid;
     background-color: rgb(255, 255, 255);

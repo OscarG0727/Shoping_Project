@@ -120,7 +120,9 @@ for (let i = 0; i < botons.length; i++) {
               console.log(entry.dataset.value)
               totalQuantityInner += Number(entry.dataset.value);
             }
+            pValueResult.dataset.value = totalQuantityInner;
             pValueResult.textContent = "$" + totalQuantityInner;
+            console.log("pValueResult ", pValueResult.dataset.value)
           }
         }
       }
@@ -182,8 +184,9 @@ for (let i = 0; i < botons.length; i++) {
           console.log(entry.dataset.value)
           totalQuantityInner += Number(entry.dataset.value);
         }
-        pValueResult.textContent = "$" + totalQuantityInner;
         pValueResult.dataset.value = totalQuantityInner;
+        pValueResult.textContent = "$" + totalQuantityInner;
+        console.log("pValueResult", pValueResult.dataset.value);
       }
 
       /* console.log("aca pValueResult", pValueResult);
@@ -228,8 +231,6 @@ for (let i = 0; i < botons.length; i++) {
                   Number(totalShopping) - Number(counterResult.dataset.value);
                 /*creamos una nueva variable donde guardaremos la resta del resultShopping */
 
-                console.log("totalShopping", totalShopping);
-                console.log("resValue", resValue);
                 resultShopping.textContent = resValue;
                 /*reemplazamos el contenido de resultShopping con el valor del resValue */
                 totalShopping = resValue;
@@ -242,14 +243,15 @@ for (let i = 0; i < botons.length; i++) {
             
             const restQuantity = divNameProd.querySelector(".quantity");
             console.log("restQuantity", restQuantity.dataset.value);
-            console.log("pValueResult", pValueResult.dataset.value);
+            // console.log("valueRest", valueRest);
             if (restQuantity){
-              let totalQuantityInput = Number(pValueResult.dataset.value) - Number(restQuantity.dataset.value);
-              console.log("totalQuantity", totalQuantityInput);
-              console.log("pValue", pValueResult);
-              pValueResult.textContent = "$" + totalQuantityInput; 
-              pValueResult.dataset.value = totalQuantityInput;
-              console.log("pValue", pValueResult);
+              let valueRest = document.querySelector(".valueResult")
+              console.log("valueRest 1", valueRest.dataset.value);
+              valueRest.dataset.value -= Number(restQuantity.dataset.value);
+              // console.log("totalQuantityInput", totalQuantityInput);
+              console.log("valueRest 2", valueRest.dataset.value);
+              valueRest.textContent = "$" + valueRest.dataset.value; 
+              console.log("valueRest 3", valueRest);
             }
 
 
@@ -336,6 +338,7 @@ for (let i = 0; i < botons.length; i++) {
               }
               totalPrice.textContent = "$" + totalPopupQuantityInner;
             }
+
             let containerShopping = document.getElementById(`${nameProd.dataset.value}-description`);
             console.log(containerShopping);
             let removeShopping = document.getElementById(`${spanNameProd.dataset.value}-detail`)
@@ -364,6 +367,19 @@ for (let i = 0; i < botons.length; i++) {
                                       `
 
           document.querySelector(".ordersConfirmedDescription").insertAdjacentHTML("beforeend", divNameCorfirm)
+          
+          let containerShopping = document.getElementById(`${nameProd.dataset.value}-description`);
+          console.log(containerShopping);
+          console.log(containerShopping);
+          if (!containerShopping) {
+            let removeShopping = document.getElementById(`${spanNameProd.dataset.value}-detail`)
+            console.log("removeShoping", removeShopping);
+            let removeShoppingInfo = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
+            console.log("removeShopingInfo", removeShoppingInfo);
+            removeShopping.remove();
+            removeShoppingInfo.remove();
+            console.log("confirmContainer", confirmContainer.length);
+          }
 
           const totalPrice = document.querySelector(".total-Price");
           const quantityPopupResults = document.querySelector(".ordersConfirmedDescription").querySelectorAll(".quantityConfirm");
@@ -374,14 +390,6 @@ for (let i = 0; i < botons.length; i++) {
             }
             totalPrice.textContent = "$" + totalPopupQuantityInner;
           }
-
-          let containerShopping = document.getElementById(`${nameProd.dataset.value}-description`);
-          console.log("removeShopping", containerShopping);
-            // if(!containerShopping) {
-            //   let removeShopping = document.getElementById();
-            //   removeShopping.remove();
-            //   i--;
-            // }
         }
 
 
