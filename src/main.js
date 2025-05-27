@@ -341,19 +341,22 @@ for (let i = 0; i < botons.length; i++) {
 
             let containerShopping = document.getElementById(`${nameProd.dataset.value}-description`);
             console.log(containerShopping);
-            let removeShopping = document.getElementById(`${spanNameProd.dataset.value}-detail`)
-            console.log(containerShopping);
             if (!containerShopping) {
-              let removeShoppingInfo = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
+              let removeShoppingImg = document.getElementById(`${spanNameProd.dataset.value}-img`);
+              removeShoppingImg.remove()
+              let removeShopping = document.getElementById(`${spanNameProd.dataset.value}-detail`)
+              console.log("removeShoping", removeShopping);
               removeShopping.remove();
+              let removeShoppingInfo = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
               removeShoppingInfo.remove();
+              console.log("removeShopingInfo", removeShoppingInfo);
               console.log("confirmContainer", confirmContainer.length);
+
             }
 
             continue
           }
-          console.log("confirmContainer", confirmContainer.length);
-          const divNameCorfirm = `<img src=""/>
+          const divNameCorfirm = `<img id="${spanNameProd.dataset.value}-img" src=""/>
                                   <span id="${spanNameProd.dataset.value}-detail">${spanNameProd.dataset.value}</span>
                                   <div class="orderConfirmedInfo" id="${spanNameProd.dataset.value}-orderConfirmInfo">
                                     <div class="ordersConfirmedPrice">
@@ -364,21 +367,25 @@ for (let i = 0; i < botons.length; i++) {
                                       <span data-value="${quantityConfirm.dataset.value}" id="${spanNameProd.dataset.value}-quantity" class="quantityConfirm">$${quantityConfirm.dataset.value}</span>
                                     </div>
                                   </div>
-                                      `
-
+          `
+          
           document.querySelector(".ordersConfirmedDescription").insertAdjacentHTML("beforeend", divNameCorfirm)
           
+          console.log("confirmContainer 1", confirmContainer.length);
+
           let containerShopping = document.getElementById(`${nameProd.dataset.value}-description`);
           console.log(containerShopping);
-          console.log(containerShopping);
           if (!containerShopping) {
+            let removeContainerImg = document.getElementById(`${spanNameProd.dataset.value}-img`);
+            removeContainerImg.remove()
             let removeShopping = document.getElementById(`${spanNameProd.dataset.value}-detail`)
             console.log("removeShoping", removeShopping);
             let removeShoppingInfo = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
             console.log("removeShopingInfo", removeShoppingInfo);
             removeShopping.remove();
             removeShoppingInfo.remove();
-            console.log("confirmContainer", confirmContainer.length);
+            console.log("confirmContainer 2", confirmContainer.length);
+            
           }
 
           const totalPrice = document.querySelector(".total-Price");
