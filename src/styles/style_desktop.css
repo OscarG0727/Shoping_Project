@@ -14,15 +14,13 @@
         margin: 0;
         padding: 0;
         background-color: rgb(251, 250, 239);
-    }
-    .body_container{
         display: grid;
         grid-template-columns: 1fr 35%;
         align-items: start;
         width: 100%;
         height: 100%;
-
     }
+    
     .container{       
       margin-top: 12%;
       margin-left: 3%;

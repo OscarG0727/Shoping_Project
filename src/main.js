@@ -1,143 +1,37 @@
 import "./styles/style_desktop.css";
 import "./styles/style.css";
-import img from "/src/assets/icon-add-to-cart.svg";
-import data from "../data.json";
-import javascriptLogo from "./javascript.svg";
-import viteLogo from "/vite.svg";
-// import { setupCounter } from "./counter.js";
-
-// `
-let cards = "";
-let totalValueItems = 0;
-
-
-for (let i in data) {
-  const imageSrc = data[i].image.desktop;
-  const nameData = data[i].name;
-  const catData = data[i].category;
-  const priceData = data[i].price;
-  cards += `<div class="items-container">
-              <div class="card-container">
-                  <img class="img-card" src="${imageSrc}"  alt="Vite logo" />
-                  <button class="addcar"><img src="${img}" alt="${i}-img" width="5px" heigth="5px" ><b>ADD TO CAR</b></button>
-              </div>
-              <div class="card-tittle">
-                <div class="category">
-                  ${catData}
-                </div>
-                <div data-value="${nameData}" id="prodName-${i}" class="nameProd">
-                  ${nameData}
-                </div>
-                <div data-value="${priceData}" id="priceItem-${i}" class="price">
-                  $${priceData}
-                </div>
-              </div>
-            </div>
-  `;
-}
-/*Data-value: asigna el contenido añadido despues del "=" a la variable creada despues del "-" */
-document.querySelector("#card").innerHTML = cards;
-
-// let somCard = document.querySelectorAll(".img-card");
-// somCard.addEventListener()
+import "./components/cards.js"
+import UpdatedCardShoppingElement from "./components/updatedCardShoppingElement.js"
 
 let botons = document.querySelectorAll(".addcar");
 let textEmpty = document.querySelector(".text_empty");
 let imgEmpty = document.querySelector(".img_empty");
 let confirmText = document.querySelector(".total-confirm-container");
-let showCart = false;
-let totalShopping = 0;
-let valueTotal = 0;
-
-
-
+let totalItemCartShopping = 0;
 
 for (let i = 0; i < botons.length; i++) {
-  /*se itera por la cantidad de botones que hay */
   if (!botons[i]) {
     continue;
   }
   botons[i].addEventListener("click", () => {
-    /*se le asigna un evento, cuando haga click */
-    let shopingProd = ""; /*creamos una variable que tiene un str vacio */
-    if (totalShopping == 0) {
+    let shopingProd = "";
+    if (totalItemCartShopping == 0) {
       textEmpty.style.display = "none";
       imgEmpty.style.display = "none";
       confirmText.style.display = "block";
 
-      /*comprobamos si la variable es igual a 0 */
-      shopingProd = `<h2 id="totalContainer" class="shoppingProd" >Your Cart(<span id="totalShopping">${totalShopping + 1
-        }</span>)</h2>`; /*creamos el titulo donde el numero aumentara cuando se le añadan numeros */
+      shopingProd = `<h2 id="totalContainer" class="shoppingProd" >Your Cart(<span id="totalItemCartShopping">${totalItemCartShopping + 1}</span>)</h2>`;
     }
-    const nameProd = document.getElementById(`prodName-${i}`); /*se localiza la variable mediante id y se guarda en una nueva variable */
-    const divProdName = document.getElementById(nameProd.dataset.value); /*se obtiene el valor de data a traves de la variable creada anteriormente */
-    if (divProdName) {/*si la variable se encuentra */
-      const spanCounter = divProdName.querySelector(".counter"); /*Seleccionamos con la clase .counter y guardamos el valor en una nueva variable */
-      if (spanCounter) {
-        /*si la variable es true */
-        const counterValue = Number(
-          spanCounter.dataset.value
-        ); /*guardamos en una nueva variable el valor de counter */
-        spanCounter.textContent =
-          counterValue + 1 + "x"; /*se añade el valor de counter + 1 */
-        spanCounter.dataset.value =
-          counterValue + 1; /*añadimos al dataset el valor de counter + 1 */
-        const divPriceItem = document.getElementById(`priceItem-${i}`); /* declaramos la variable y guardamos dentro el valor del html*/
-        const quantityResult = divProdName.querySelector(".quantity"); /*declaramos una nueva variable y y guardamos el valor por el nombre del valor*/
-        if (quantityResult) { /*si la variable existe */
-          const quantityValue = (counterValue + 1) * Number(divPriceItem.dataset.value); /*declaramos una variable donde estara la multiplicacion de quantity*/
-          quantityResult.textContent = "$" + quantityValue; /*sobreescribiremos el valor html de quantityResult */
-          quantityResult.dataset.value = quantityValue; /*sobreescribimos el value de la variable */
-          /*           console.log("Result", quantityResult)
-                    console.log("Value", quantityValue)
-                    console.log("divProdName", divProdName) */
-        }
-        totalShopping += 1; /*cuando se añade un articulo repetido este igual se añade */
-        let shoppingCartSpan = document.getElementById("totalShopping");
-        /*creamos una nueva variable donde guardaremos el valor de totalShopping */
-        if (shoppingCartSpan) {
-          /*si este existe */
-/*           console.log("aca totalShopping: ", totalShopping);
- */          shoppingCartSpan.textContent = totalShopping;
-          /*se reemplazara el contenido de la variable */
-        }
-
-        const pValueResult = document.querySelector(".valueResult");
-        if (pValueResult) {
-          /* const pResult = Number(valueTotal) + counterValue + 1;
-          console.log("quantity: ", counterValue + 1)
-          console.log("valueTotal: ", valueTotal)
-          console.log("pResult: ", pResult)
-          pValueResult.textContent = "$" + Number(pResult);
-          valueTotal += pResult */
-
-          const quantityResults = document.querySelector(".orders").querySelectorAll(".quantity");
-          console.log("Aqui 2: ", quantityResults)
-          if (quantityResults) {
-            let totalQuantityInner = 0
-            for (const entry of quantityResults) {
-              console.log(entry)
-              console.log(entry.dataset.value)
-              totalQuantityInner += Number(entry.dataset.value);
-            }
-            pValueResult.dataset.value = totalQuantityInner;
-            pValueResult.textContent = "$" + totalQuantityInner;
-            console.log("pValueResult ", pValueResult.dataset.value)
-          }
-        }
-      }
+    const nameProd = document.getElementById(`prodName-${i}`);
+    const divProdName = document.getElementById(nameProd.dataset.value);
+    if (divProdName) {
+      totalItemCartShopping = updatedCardShoppingElement(divProdName, i, totalItemCartShopping);
     } else {
-      const inicialValue = 1; /*se crea la variable del counter */
-      totalShopping += 1; /*si no hay objetos repetidos, toma este valor y sigue  */
+      const inicialValue = 1;
+      totalItemCartShopping += 1;
 
-
-      const pricesItem = document.getElementById(`priceItem-${i}`); /*en una variable guardamos el getElement de priceItem */
-      const divPriceItem = document.getElementById(pricesItem.dataset.value); /*en otra variable guardaremos la variable anterior junto con el metodo dataset */
-/*       console.log("aca totalShopping: ", totalShopping);
- */      let counterData = document.querySelector(".counter");
-      // console.log(nameProd.dataset.value)
+      const pricesItem = document.getElementById(`priceItem-${i}`);
       const quantityData = Number(inicialValue * pricesItem.dataset.value);
-      // console.log(quantityData)
 
       shopingProd += `<div class="shoping-card-container" id="${nameProd.dataset.value}">
                           <div class="shoping-card-description" id="${nameProd.dataset.value}-description">
@@ -154,113 +48,71 @@ for (let i = 0; i < botons.length; i++) {
                         </div>
                         `;
 
-      let shoppingCartSpan = document.getElementById("totalShopping");
+      let shoppingCartSpan = document.getElementById("totalItemCartShopping");
       if (shoppingCartSpan) {
-        console.log("aqui totalShopping: ", totalShopping);
-        shoppingCartSpan.textContent = totalShopping;
+        shoppingCartSpan.textContent = totalItemCartShopping;
       }
-
-
 
       document
         .querySelector(".orders")
         .insertAdjacentHTML("beforeend", shopingProd);
 
 
+      // ----------------------------
+
       const pValueResult = document.querySelector(".valueResult");
-      /*       const pResult = Number(valueTotal) + quantityData;
-            console.log("quantity: ", quantityData)
-            console.log("valueTotal: ", valueTotal)
-            console.log("pResult: ", pResult)
-            pValueResult.textContent = "$" + Number(pResult);
-            valueTotal += pResult */
 
       const quantityResults = document.querySelector(".orders").querySelectorAll(".quantity");
-      console.log("Aqui 1: ", quantityResults)
       if (quantityResults) {
         let totalQuantityInner = 0
         for (const entry of quantityResults) {
-          console.log(entry)
-          console.log(entry.dataset.value)
           totalQuantityInner += Number(entry.dataset.value);
         }
         pValueResult.dataset.value = totalQuantityInner;
         pValueResult.textContent = "$" + totalQuantityInner;
-        console.log("pValueResult", pValueResult.dataset.value);
       }
 
-      /* console.log("aca pValueResult", pValueResult);
-      console.log("aca pQuantityResult", pQuantityResult.dataset.value);
-      console.log("aca pResult", pResult);
-      console.log("aca valueTotal", valueTotal); */
-
-
       let cancelbuttons = document.querySelectorAll(".cancel");
-/*       console.log("cancelbuttons", cancelbuttons);
- */      cancelbuttons.forEach((btn) => {
-        /*itera por la cantidad de la variable */
+      cancelbuttons.forEach((btn) => {
 
         btn.addEventListener("click", () => {
-          /*le agregamos un evento */
           const idContainer =
             btn.id.slice(
               4
-            ); /*va a returnar una seccion del str dependiendo del nuevo que pongamos */
+            );
           const selectedContainer =
             document.getElementById(
               idContainer
-            ); /*guardamos en una nueva variable el elemento identificado por el id */
-/*           console.log("selectedContainer", selectedContainer);
- */          if (selectedContainer) {
-            /*si la variable existe */
+            );
+          if (selectedContainer) {
             const nameProd = document.getElementById(`prodName-${i}`);
-            /*se localiza la variable mediante id y se guarda en una nueva variable */
 
             const divProdName = document.getElementById(nameProd.dataset.value);
-            /*se crea una nueva variable donde se guarda el data-value de nameProd */
             if (divProdName) {
-              /*si existe la variable */
               const counterResult = divProdName.querySelector(".counter");
-              /*creamos una variable donde tendremos el valor de counter mediante el divProdName*/
-              console.log("counterResult", counterResult);
-              let resultShopping = document.getElementById("totalShopping");
-              /*creamos una variable y guardamos el valor mediante el id */
+              let resultShopping = document.getElementById("totalItemCartShopping");
               if (resultShopping) {
-                /*si existe la variable */
                 const resValue =
-                  Number(totalShopping) - Number(counterResult.dataset.value);
-                /*creamos una nueva variable donde guardaremos la resta del resultShopping */
+                  Number(totalItemCartShopping) - Number(counterResult.dataset.value);
 
                 resultShopping.textContent = resValue;
-                /*reemplazamos el contenido de resultShopping con el valor del resValue */
-                totalShopping = resValue;
-                /*reemplazamos el valor de totalShopping con el valor de resValue */
+                totalItemCartShopping = resValue;
               }
             }
 
             selectedContainer.remove();
-            /*removemos el selectedContainer despues de restar el totalShopping */
-            
+
             const restQuantity = divNameProd.querySelector(".quantity");
-            console.log("restQuantity", restQuantity.dataset.value);
-            // console.log("valueRest", valueRest);
-            if (restQuantity){
+            if (restQuantity) {
               let valueRest = document.querySelector(".valueResult")
-              console.log("valueRest 1", valueRest.dataset.value);
               valueRest.dataset.value -= Number(restQuantity.dataset.value);
-              // console.log("totalQuantityInput", totalQuantityInput);
-              console.log("valueRest 2", valueRest.dataset.value);
-              valueRest.textContent = "$" + valueRest.dataset.value; 
-              console.log("valueRest 3", valueRest);
+              valueRest.textContent = "$" + valueRest.dataset.value;
             }
 
 
-            if (totalShopping <= 0) {
-              /*si la variable es menor o igual que 0 */
+            if (totalItemCartShopping <= 0) {
               const removeCart = document.getElementById("totalContainer");
-              /*creamos una nueva variable donde guardamos el valor mediante el id */
               removeCart.remove();
-              /*lo removemos para que no se muestre fisicamente */
               textEmpty.style.display = "block";
               imgEmpty.style.display = "block";
               confirmText.style.display = "none";
@@ -278,9 +130,9 @@ for (let i = 0; i < botons.length; i++) {
       const counterConfirm = divNameProd.querySelector(".counter");
 
       let totalValuePrice = 0;
-      
+
       confirmOrder.addEventListener("click", () => {
-        
+
         const dataConfim = `<div class="win_emergent">
                                   <div class="emergent_content">
                                     <div class="confirmDescription">
@@ -308,7 +160,6 @@ for (let i = 0; i < botons.length; i++) {
 
         const win_emergent = document.querySelector(".win_emergent")
 
-
         if (!win_emergent) {
           document.querySelector(".emergent").insertAdjacentHTML("beforeend", dataConfim);
         }
@@ -317,8 +168,6 @@ for (let i = 0; i < botons.length; i++) {
           win_emergent.style.display = "flex"
         }
 
-
-        console.log(confirmContainer);
         for (let i = 0; i < confirmContainer.length; i++) {
           if (document.getElementById(spanNameProd.dataset.value + "-detail")) {
             const divCounter = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
@@ -328,7 +177,7 @@ for (let i = 0; i < botons.length; i++) {
             const quantityPrice = divCounter.querySelector(".quantityConfirm");
             quantityPrice.textContent = "$" + quantityConfirm.dataset.value;
             quantityPrice.dataset.value = quantityConfirm.dataset.value;
-            
+
             const totalPrice = document.querySelector(".total-Price");
             const quantityPopupResults = document.querySelector(".ordersConfirmedDescription").querySelectorAll(".quantityConfirm");
             if (quantityResults) {
@@ -340,18 +189,13 @@ for (let i = 0; i < botons.length; i++) {
             }
 
             let containerShopping = document.getElementById(`${nameProd.dataset.value}-description`);
-            console.log(containerShopping);
             if (!containerShopping) {
               let removeShoppingImg = document.getElementById(`${spanNameProd.dataset.value}-img`);
               removeShoppingImg.remove()
               let removeShopping = document.getElementById(`${spanNameProd.dataset.value}-detail`)
-              console.log("removeShoping", removeShopping);
               removeShopping.remove();
               let removeShoppingInfo = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
               removeShoppingInfo.remove();
-              console.log("removeShopingInfo", removeShoppingInfo);
-              console.log("confirmContainer", confirmContainer.length);
-
             }
 
             continue
@@ -368,24 +212,17 @@ for (let i = 0; i < botons.length; i++) {
                                     </div>
                                   </div>
           `
-          
+
           document.querySelector(".ordersConfirmedDescription").insertAdjacentHTML("beforeend", divNameCorfirm)
-          
-          console.log("confirmContainer 1", confirmContainer.length);
 
           let containerShopping = document.getElementById(`${nameProd.dataset.value}-description`);
-          console.log(containerShopping);
           if (!containerShopping) {
             let removeContainerImg = document.getElementById(`${spanNameProd.dataset.value}-img`);
             removeContainerImg.remove()
             let removeShopping = document.getElementById(`${spanNameProd.dataset.value}-detail`)
-            console.log("removeShoping", removeShopping);
             let removeShoppingInfo = document.getElementById(`${spanNameProd.dataset.value}-orderConfirmInfo`);
-            console.log("removeShopingInfo", removeShoppingInfo);
             removeShopping.remove();
             removeShoppingInfo.remove();
-            console.log("confirmContainer 2", confirmContainer.length);
-            
           }
 
           const totalPrice = document.querySelector(".total-Price");
@@ -398,7 +235,6 @@ for (let i = 0; i < botons.length; i++) {
             totalPrice.textContent = "$" + totalPopupQuantityInner;
           }
         }
-
 
         const btnClose = document.getElementById("btn_close");
 
