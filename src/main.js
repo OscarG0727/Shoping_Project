@@ -1,7 +1,7 @@
 import "./styles/style_desktop.css";
 import "./styles/style.css";
 import "./components/cards.js"
-import UpdatedCardShoppingElement from "./components/updatedCardShoppingElement.js"
+import updatedCardShoppingElement from "./components/updatedCardShoppingElement.js"
 
 let botons = document.querySelectorAll(".addcar");
 let textEmpty = document.querySelector(".text_empty");
