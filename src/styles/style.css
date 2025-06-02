@@ -184,7 +184,7 @@
     border: none;
     grid-row: 10/12;
   }
-  .win_emergent {
+  .winEmergent {
     display: none;
   }
   .emergent_content {

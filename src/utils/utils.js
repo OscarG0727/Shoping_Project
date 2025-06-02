@@ -18,3 +18,10 @@ export function updateCartShoppingTotalElement() {
     }
   }
 }
+
+export function setTotalCartShopping() {
+  const totalCartShopping = document.getElementById("totalItemCartShopping");
+  const totalCartShoppingValue = Number(totalCartShopping?.textContent || 0) + 1;
+
+  updateElementDetails(totalCartShopping, totalCartShoppingValue, false, null);
+}

@@ -16,7 +16,7 @@ for (let cardIndex in data) {
                 <div class="category">
                   ${category}
                 </div>
-                <div data-value="${name}" id="prodName-${cardIndex}" class="nameProd">
+                <div data-value="${name}" id="cardProduct-${cardIndex}" class="nameProd">
                   ${name}
                 </div>
                 <div data-value="${price}" id="priceItem-${cardIndex}" class="price">

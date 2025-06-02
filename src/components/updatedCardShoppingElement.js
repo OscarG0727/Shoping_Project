@@ -1,6 +1,6 @@
-import { updateElementDetails, updateCartShoppingTotalElement } from "../utils/utils";
+import { updateElementDetails, updateCartShoppingTotalElement, setTotalCartShopping } from "../utils/utils";
 
-export default function updatedCardShoppingElement(divProdName, buttonIndex, totalItemCartShopping) {
+export default function updatedCardShoppingElement(divProdName, buttonIndex) {
 
   if (divProdName && typeof divProdName == 'object' && buttonIndex) {
 
@@ -14,12 +14,8 @@ export default function updatedCardShoppingElement(divProdName, buttonIndex, tot
     const quantityValue = (counterValue + 1) * Number(cardPrice.dataset.value);
     updateElementDetails(totalValuePrice, quantityValue, true, "$");
 
-    totalItemCartShopping += 1;
-
-    updateElementDetails(document.getElementById("totalItemCartShopping"), totalItemCartShopping, false, null);
+    setTotalCartShopping();
 
     updateCartShoppingTotalElement();
-
-    return totalItemCartShopping
   }
 }
