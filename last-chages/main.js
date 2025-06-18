@@ -224,7 +224,7 @@ for (let i = 0; i < botons.length; i++) {
 
       confirmOrder.addEventListener("click", () => {
 
-        const dataConfim = `<div class="win_emergent">
+        const dataConfim = `<div class="winEmergent">
                                   <div class="emergent_content">
                                     <div class="confirmDescription">
                                       <img src="./src/assets/icon-order-confirmed.svg" alt="">
@@ -249,14 +249,14 @@ for (let i = 0; i < botons.length; i++) {
                                   </div>
                                 </div>`
 
-        const win_emergent = document.querySelector(".win_emergent")
+        const winEmergent = document.querySelector(".winEmergent")
 
-        if (!win_emergent) {
+        if (!winEmergent) {
           document.querySelector(".emergent").insertAdjacentHTML("beforeend", dataConfim);
         }
 
-        if (win_emergent) {
-          win_emergent.style.display = "flex"
+        if (winEmergent) {
+          winEmergent.style.display = "flex"
         }
 
         for (let i = 0; i < confirmContainer.length; i++) {
@@ -281,8 +281,8 @@ for (let i = 0; i < botons.length; i++) {
         const btnClose = document.getElementById("btn_close");
 
         btnClose.addEventListener("click", () => {
-          if (win_emergent) {
-            win_emergent.style.display = "None"
+          if (winEmergent) {
+            winEmergent.style.display = "None"
           }
         });
       });
